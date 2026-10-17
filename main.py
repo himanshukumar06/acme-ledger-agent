@@ -118,7 +118,8 @@ def get_business_date(timestamp: str) -> date:
 # ============================================================
 # FETCH ROOT API
 # ============================================================
-
+import os
+QUESTION_DATA_URL = os.getenv("ACME_ROOT_URL")
 def fetch_root_data():
     """
     Fetch the root questionData endpoint.
@@ -129,7 +130,9 @@ def fetch_root_data():
         links.export
         notes
     """
+    if not QUESTION_DATA_URL:
 
+        raise RuntimeError("ACME_ROOT_URL is not configured")
     logger.info("Fetching root API...")
 
     response = requests.get(
