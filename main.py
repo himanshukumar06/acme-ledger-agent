@@ -1035,10 +1035,6 @@ def load_data():
 # STARTUP
 # ============================================================
 
-@app.on_event("startup")
-def startup_event():
-
-    load_data()
 
 
 # ============================================================
@@ -1075,7 +1071,7 @@ def root():
 
 @app.post("/")
 def answer_question(request: QuestionRequest):
-
+    load_data()
     question = request.question.strip()
 
     if not question:
